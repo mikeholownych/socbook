@@ -4,7 +4,7 @@ class SocBooksController < ApplicationController
   # GET /soc_books
   # GET /soc_books.json
   def index
-    @soc_books = SocBook.all
+    @soc_books = current_user.soc_books
   end
 
   # GET /soc_books/1
@@ -14,7 +14,7 @@ class SocBooksController < ApplicationController
 
   # GET /soc_books/new
   def new
-    @soc_book = SocBook.new
+    @soc_book = current_user.soc_books.new
   end
 
   # GET /soc_books/1/edit
@@ -24,7 +24,7 @@ class SocBooksController < ApplicationController
   # POST /soc_books
   # POST /soc_books.json
   def create
-    @soc_book = SocBook.new(soc_book_params)
+    @soc_book = current_user.soc_books.new(soc_book_params)
 
     respond_to do |format|
       if @soc_book.save
@@ -69,6 +69,6 @@ class SocBooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def soc_book_params
-      params[:soc_book]
+      params.require(:soc_book).permit(:url, :user_id, :topics[])
     end
 end

@@ -3,23 +3,20 @@
 <table>
   <thead>
     <tr>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Url</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @soc_books.each do |soc_book| %>
       <tr>
-        <td><%= link_to 'Show', soc_book %></td>
-        <td><%= link_to 'Edit', edit_soc_book_path(soc_book) %></td>
-        <td><%= link_to 'Destroy', soc_book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to soc_book.url, soc_book.url %></td>
+        <td><%= link_to 'Edit', edit_soc_book_path(soc_book) %>
+        <%= link_to 'Destroy', soc_book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Social bookmark', new_soc_book_path %>
