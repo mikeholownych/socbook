@@ -11,7 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140712160720) do
+ActiveRecord::Schema.define(version: 20140713141625) do
+
+  create_table "likes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "soc_book_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "likes", ["soc_book_id"], name: "index_likes_on_soc_book_id"
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id"
+
+  create_table "soc_book_topics", force: true do |t|
+    t.integer  "soc_book_id"
+    t.integer  "topic_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "soc_book_topics", ["soc_book_id"], name: "index_soc_book_topics_on_soc_book_id"
+  add_index "soc_book_topics", ["topic_id"], name: "index_soc_book_topics_on_topic_id"
+
+  create_table "soc_books", force: true do |t|
+    t.string   "url"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "soc_books", ["user_id"], name: "index_soc_books_on_user_id"
+
+  create_table "topics", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
