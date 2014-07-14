@@ -1,7 +1,8 @@
 Socbook::Application.routes.draw do
-  resources :likes
 
-  resources :soc_books
+  resources :soc_books do
+    resources :likes
+  end
 
   resources :topics
 

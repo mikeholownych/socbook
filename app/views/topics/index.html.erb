@@ -1,5 +1,9 @@
 <h1>Listing topics</h1>
 
+<% @soc_books.each do |soc_book| %>
+
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -11,12 +15,12 @@
   </thead>
 
   <tbody>
-    <% @topics.each do |topic| %>
+    <% @soc_books.each do |soc_book| %>
       <tr>
-        <td><%= topic.name %></td>
-        <td><%= link_to 'Show', topic %></td>
-        <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
-        <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= soc_book.url %></td>
+        <td><%= link_to 'Show', soc_book %></td>
+        <td><%= link_to 'Edit', edit_soc_book_path(topic) %></td>
+        <td><%= link_to 'Destroy', soc_book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Topic', new_topic_path %>
+<%= link_to 'New Social Bookmark', new_soc_book_path %>

@@ -12,8 +12,15 @@
     <% @soc_books.each do |soc_book| %>
       <tr>
         <td><%= link_to soc_book.url, soc_book.url %></td>
-        <td><%= link_to 'Edit', edit_soc_book_path(soc_book) %>
-        <%= link_to 'Destroy', soc_book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <% if @liked_soc_book_ids.include?(soc_book.id) %>
+            <%= link_to 'Unlike', soc_book_like_path(soc_book.id, 1), method: :delete, remote: true, class: "like-#{soc_book.id}" %>
+          <% else %>
+            <%= link_to 'Like', soc_book_likes_path(soc_book.id), method: :post, remote: true, class: "like-#{soc_book.id}" %>
+          <% end %>
+          <%= link_to 'Edit', edit_soc_book_path(soc_book) %>
+          <%= link_to 'Destroy', soc_book, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
