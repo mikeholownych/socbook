@@ -10,6 +10,16 @@ class IncomingController < ApplicationController
     # You put the message-splitting and business
     # magic here. 
 
+    subject = params[:Subject]
+
+    Rails.logger.info ">>>>>>>>>>>>>>> #{subject}"
+
+    topics = []
+
+    subject.scan(/\B#([^,\#]+)/).each do |topic|
+      topics.push(Topic.find_or_create_by(name: topic.to_s.downcase))
+    end
+
     # Assuming all went well. 
     head 200
   end
