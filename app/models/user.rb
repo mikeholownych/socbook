@@ -28,4 +28,12 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  def topics
+    topics = []
+    self.soc_books.each do |soc_book|
+      topics.push(soc_book.topics).uniq
+    end
+    topics
+  end
 end

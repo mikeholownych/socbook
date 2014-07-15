@@ -15,6 +15,7 @@
             <span class='glyphicon glyphicon-bookmark' style="font-size: 2em;"><b>SocBook</b></span>
           <% end %>
         </li>
+        <li><%= link_to "My Social Bookmarks", soc_books_path %></li>
         <div class="pull-right user-info">
           <% if current_user %>
             Hello <%= current_user.name || current_user.email %>!

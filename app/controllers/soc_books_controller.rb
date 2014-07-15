@@ -1,10 +1,25 @@
 class SocBooksController < ApplicationController
   before_action :set_soc_book, only: [:show, :edit, :update, :destroy]
 
+  def all
+    @soc_books = Soc_Book.all
+    @likes = current_user.likes
+    @liked_soc_book_ids = @likes.collect(&:soc_book_id)
+  end
+
   # GET /soc_books
   # GET /soc_books.json
   def index
     @soc_books = current_user.soc_books
+    @likes = current_user.likes
+    @liked_soc_book_ids = @likes.collect(&:soc_book_id)
+
+    # embedly = Embedly::API.new key: ENV['EMBEDLY_KEY']
+    # Rails.logger.info embedly.inspect
+    # obj = embedly.oembed url: @soc_books.first.url
+    # puts obj[0].marshal_dump
+    # json_obj = JSON.pretty_generate(obj[0].marshal_dump)
+    # puts json_obj
   end
 
   # GET /soc_books/1
@@ -69,6 +84,6 @@ class SocBooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def soc_book_params
-      params.require(:soc_book).permit(:url, :user_id, :topics[])
+      params.require(:soc_book).permit(:url, :user_id)
     end
 end
