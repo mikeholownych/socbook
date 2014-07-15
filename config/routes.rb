@@ -14,5 +14,7 @@ Socbook::Application.routes.draw do
   get "pages/index"
   get "pages/about"
 
+  post :incoming, to: 'incoming#create'
+
   root to: 'pages#index'
 end
