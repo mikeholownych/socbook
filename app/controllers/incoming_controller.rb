@@ -11,8 +11,9 @@ class IncomingController < ApplicationController
     # magic here. 
 
     user = User.find_by(email: params[:sender])
-    subject = params[:Subject]
+    subject = params[:subject]
     content = params[:'body-plain']
+    url = content.scan(/(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/)
 
     topics = []
 
@@ -20,10 +21,15 @@ class IncomingController < ApplicationController
       topics.push(Topic.find_or_create_by(name: topic[0].to_s.downcase))
     end
 
-    Rails.logger.info ">>>>>>>>>>>>>> USER: #{user.inspect} <<<<<<<<<<<<<<<<<<<<<<"
-    Rails.logger.info ">>>>>>>>>>>>>> CONTENT HERE: #{content} <<<<<<<<<<<<<<<<<<<"
+    soc_book = user.soc_books.build(url: url)
 
-    # Assuming all went well. 
-    head 200
+    if soc_book.save
+      topics.each do |topic|
+        Soc_BookTopic.create(soc_book_id: soc_book.id, topic_id: topic.id)
+      end
+      head 200
+    else
+      head :no_content
+    end
   end
 end
