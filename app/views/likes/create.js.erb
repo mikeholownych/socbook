@@ -1,0 +1,1 @@
+$(".like-" + <%= params[:soc_book_id] %>).html('<%= link_to "Unlike", soc_book_like_path(params[:soc_book_id], 1), method: :delete, remote: true %>');

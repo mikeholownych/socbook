@@ -1,0 +1,31 @@
+<h1>Listing topics</h1>
+
+<% @soc_books.each do |soc_book| %>
+
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @soc_books.each do |soc_book| %>
+      <tr>
+        <td><%= soc_book.url %></td>
+        <td><%= link_to 'Show', soc_book %></td>
+        <td><%= link_to 'Edit', edit_soc_book_path(topic) %></td>
+        <td><%= link_to 'Destroy', soc_book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Social Bookmark', new_soc_book_path %>

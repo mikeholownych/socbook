@@ -1,0 +1,1 @@
+$(".like-" + <%= params[:soc_book_id] %>).html('<%= link_to "Like", soc_book_likes_path(params[:soc_book_id]), method: :post, remote: true, id: "like" %>');
